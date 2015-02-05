@@ -10,10 +10,14 @@ import android.view.MenuItem;
 
 public class MainActivity extends ActionBarActivity {
 
+    Tools tools=new Tools();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        tools.loadFragment(getFragmentManager(),new ListContacFragment(),R.id.container,"");
+
     }
 
     @Override
