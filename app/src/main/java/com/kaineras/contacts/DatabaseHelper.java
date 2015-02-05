@@ -1,18 +1,12 @@
 package com.kaineras.contacts;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.stmt.PreparedQuery;
-import com.j256.ormlite.stmt.StatementBuilder;
-import com.j256.ormlite.support.CompiledStatement;
 import com.j256.ormlite.support.ConnectionSource;
-import com.j256.ormlite.support.DatabaseConnection;
-import com.j256.ormlite.support.DatabaseResults;
 import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
@@ -39,13 +33,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return mContactDao;
     }
 
-    public void getContacts() throws SQLException {
-        List<Contact> contact=getContactDao().queryForAll();
-        for(Contact cTemp:contact)
-        {
-            Log.v("NAME",cTemp.getName());
-            Log.v("LASTNAME",cTemp.getLastName());
-        }
+    public List<Contact> getContacts() throws SQLException {
+        /*for(Contact cTemp:contact)
+            Log.v("Query_Res",cTemp.getName());*/
+        return getContactDao().queryForAll();
     }
 
     @Override
