@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Contacts</string>
+    <string name="action_settings">Settings</string>
+    <string name="contact_image">Contact Image</string>
+    <string name="add_title">Add contact</string>
+    <string name="text_name">Name (Mandatory)</string>
+    <string name="text_last_name">Last Name (Mandatory)</string>
+    <string name="text_nickname">Nickname (Optional)</string>
+    <string name="text_button_camera">Take a Picture</string>
+    <string name="title_activity_add_contact">Add Contact</string>
+    <string name="text_button_save">Save</string>
+
+</resources>
