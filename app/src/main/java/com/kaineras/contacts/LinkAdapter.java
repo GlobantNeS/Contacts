@@ -43,33 +43,31 @@ public class LinkAdapter extends ArrayAdapter<Contact> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View v = convertView;
 
-        if ( v == null) {
-
+        if ( v == null)
+        {
             LayoutInflater inf = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inf.inflate(R.layout.contact_layout, null);
-            TextView tName = (TextView) v.findViewById(R.id.contName);
-            ImageView contImage =(ImageView) v.findViewById(R.id.contImage);
-
-            String nickname=contactList.get(position).getNickName();
-            String name=contactList.get(position).getName();
-            byte[] imaByte=contactList.get(position).getImage();
-
-            Log.v("","-------------------------------------");
-            Log.v("NAME",name);
-            Log.v("NICKNAME", nickname);
-
-            if(nickname.isEmpty())
-                tName.setText(name);
-            else
-                tName.setText(nickname);
-
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            Bitmap bitmap = BitmapFactory.decodeByteArray(imaByte, 0, imaByte.length, options);
-            contImage.setImageBitmap(bitmap );
         }
+
+        TextView tName = (TextView) v.findViewById(R.id.contName);
+        final ImageView contImage =(ImageView) v.findViewById(R.id.contImage);
+
+        String nickname=contactList.get(position).getNickName();
+        String name=contactList.get(position).getName();
+        byte[] imaByte=contactList.get(position).getImage();
+
+        if(nickname.equals("_"))
+            tName.setText(name);
+        else
+            tName.setText(nickname);
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(imaByte, 0, imaByte.length, options);
+        contImage.setImageBitmap(bitmap);
+
         return v;
     }
 }

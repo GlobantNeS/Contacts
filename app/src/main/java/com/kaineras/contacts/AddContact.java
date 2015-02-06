@@ -14,10 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.j256.ormlite.dao.Dao;
-
 import java.io.ByteArrayOutputStream;
-import java.sql.SQLException;
 
 
 public class AddContact extends ActionBarActivity {
@@ -64,16 +61,20 @@ public class AddContact extends ActionBarActivity {
                     Toast.makeText(getApplicationContext(),"Fill all the fields",Toast.LENGTH_LONG).show();
                 else
                 {
+
                     String name=txtName.getText().toString();
                     String lastname=txtLast.getText().toString();
                     String nickname=txtNick.getText().toString();
+                    if(nickname.isEmpty())
+                        nickname="_";
                     byte[] image;
                     ByteArrayOutputStream bos;
                     bos = new ByteArrayOutputStream();
                     bMap.compress(Bitmap.CompressFormat.PNG, 100, bos);
                     image = bos.toByteArray();
-                    Contact contact=createContactFromData(name,lastname,nickname,image);
-                    saveContact(contact);
+                    mDBHelper=getDBHelper();
+                    Contact contact=mDBHelper.createContactFromData(name,lastname,nickname,image);
+                    mDBHelper.saveContact(contact);
                     setResult(RESULT_OK);
                     finish();
                 }
@@ -99,23 +100,7 @@ public class AddContact extends ActionBarActivity {
         }
     }
 
-    private Contact createContactFromData(String name,String lastname,String nickname,byte[] ima) {
-        Contact contact = new Contact();
-        contact.setName(name);
-        contact.setLastName(lastname);
-        contact.setNickName(nickname);
-        contact.setImage(ima);
-        return contact;
-    }
 
-    private void saveContact(Contact contact) {
-        try {
-            Dao<Contact,Integer> dao = getDBHelper().getContactDao();
-            dao.create(contact);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
