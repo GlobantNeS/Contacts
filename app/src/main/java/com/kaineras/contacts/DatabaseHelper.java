@@ -1,9 +1,11 @@
 package com.kaineras.contacts;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
@@ -24,6 +26,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    public DatabaseHelper getDBHelper(Activity activity,DatabaseHelper mDBHelper) {
+        if (mDBHelper == null) {
+            mDBHelper = OpenHelperManager.getHelper(activity,this.getClass());
+        }
+        return mDBHelper;
     }
 
     public Dao<Contact, Integer> getContactDao() throws SQLException {

@@ -6,15 +6,10 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
-import com.j256.ormlite.android.apptools.OpenHelperManager;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -28,7 +23,7 @@ public class ListContacFragment extends Fragment {
     private DatabaseHelper mDBHelper = null;
     LinkAdapter mAdapter;
     View v;
-    List<Contact> contactList,temp;
+    List<Contact> contactList;
 
     public ListContacFragment() {
         // Required empty public constructor
@@ -38,7 +33,7 @@ public class ListContacFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mDBHelper=getDBHelper();
+        mDBHelper=mDBHelper.getDBHelper(getActivity(),mDBHelper);
         try {
             contactList=mDBHelper.getContacts();
             for(Contact cTemp:contactList)
@@ -60,12 +55,7 @@ public class ListContacFragment extends Fragment {
         mAdapter.add(temp);
     }
 
-    private DatabaseHelper getDBHelper() {
-        if (mDBHelper == null) {
-            mDBHelper = OpenHelperManager.getHelper(getActivity(), DatabaseHelper.class);
-        }
-        return mDBHelper;
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
