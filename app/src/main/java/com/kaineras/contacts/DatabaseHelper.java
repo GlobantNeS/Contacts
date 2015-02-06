@@ -34,7 +34,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     }
 
     public List<Contact> getContacts() throws SQLException {
-        /*for(Contact cTemp:contact)
+        /*for(Contact cTemp:getContactDao().queryForAll())
             Log.v("Query_Res",cTemp.getName());*/
         return getContactDao().queryForAll();
     }

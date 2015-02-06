@@ -74,6 +74,7 @@ public class AddContact extends ActionBarActivity {
                     image = bos.toByteArray();
                     Contact contact=createContactFromData(name,lastname,nickname,image);
                     saveContact(contact);
+                    setResult(RESULT_OK);
                     finish();
                 }
             }

@@ -4,20 +4,38 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.sql.SQLException;
 
 
 public class MainActivity extends ActionBarActivity {
 
+    private static final int REQUEST_CODE = 0;
     Tools tools=new Tools();
+    ListContacFragment lcf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tools.loadFragment(getFragmentManager(),new ListContacFragment(),R.id.container,"");
+        lcf=new ListContacFragment();
+        tools.loadFragment(getFragmentManager(),lcf,R.id.container,"");
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE)
+            if (resultCode == RESULT_OK)
+                try {
+                    lcf.addContact();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
     }
 
     @Override
@@ -37,7 +55,7 @@ public class MainActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_add) {
             Intent intent=new Intent(this,AddContact.class);
-            startActivity(intent);
+            startActivityForResult(intent,REQUEST_CODE);
             return true;
         }
 

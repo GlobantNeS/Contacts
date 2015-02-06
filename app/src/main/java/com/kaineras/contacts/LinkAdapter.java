@@ -3,6 +3,7 @@ package com.kaineras.contacts;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,15 +47,25 @@ public class LinkAdapter extends ArrayAdapter<Contact> {
         View v = convertView;
 
         if ( v == null) {
+
             LayoutInflater inf = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inf.inflate(R.layout.contact_layout, null);
             TextView tName = (TextView) v.findViewById(R.id.contName);
             ImageView contImage =(ImageView) v.findViewById(R.id.contImage);
-            if(contactList.get(position).getNickName().isEmpty())
-                tName.setText(contactList.get(position).getName());
-            else
-                tName.setText(contactList.get(position).getNickName());
+
+            String nickname=contactList.get(position).getNickName();
+            String name=contactList.get(position).getName();
             byte[] imaByte=contactList.get(position).getImage();
+
+            Log.v("","-------------------------------------");
+            Log.v("NAME",name);
+            Log.v("NICKNAME", nickname);
+
+            if(nickname.isEmpty())
+                tName.setText(name);
+            else
+                tName.setText(nickname);
+
             BitmapFactory.Options options = new BitmapFactory.Options();
             Bitmap bitmap = BitmapFactory.decodeByteArray(imaByte, 0, imaByte.length, options);
             contImage.setImageBitmap(bitmap );
