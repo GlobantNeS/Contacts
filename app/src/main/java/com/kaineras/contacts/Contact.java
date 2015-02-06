@@ -25,13 +25,6 @@ public class Contact {
 
     }
 
-    public Contact(String name, String lastName, String nickName, byte[] image) {
-        this.setName(name);
-        this.setLastName(lastName);
-        this.setNickName(nickName);
-        this.setImage(image);
-    }
-
     public String getName() {
         return name;
     }
@@ -62,5 +55,13 @@ public class Contact {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public int get_id() {
+        return _id;
+    }
+
+    public void set_id(int _id) {
+        this._id = _id;
     }
 }

@@ -2,19 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:weightSum="1"
+    android:accessibilityLiveRegion="assertive"
+    android:baselineAligned="false"
+    android:descendantFocusability="blocksDescendants">
 
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="60dp"
         android:id="@+id/contImage"
-        android:contentDescription="@string/contact_image" />
+        android:contentDescription="@string/contact_image"
+        />
 
     <TextView  android:id="@+id/contName"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/abc_text_size_medium_material" />
+        android:textSize="@dimen/abc_text_size_medium_material"
+        />
 
 </LinearLayout>

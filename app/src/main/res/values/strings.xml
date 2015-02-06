@@ -11,5 +11,9 @@
     <string name="text_button_camera">Take a Picture</string>
     <string name="title_activity_add_contact">Add Contact</string>
     <string name="text_button_save">Save</string>
+    <string name="title_activity_update_delete_contact">Update Contact</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="text_button_update">Update</string>
+    <string name="text_button_delete">Delete</string>
 
 </resources>
